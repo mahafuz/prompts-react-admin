@@ -1,28 +1,28 @@
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
-import Route from 'react-router-dom/Route';
-import Switch from 'react-router-dom/Switch';
-
+import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import Navbar from './components/Navbar';
-import Profile from './components/Profile';
-import Admin from './components/Admin';
-import Settings from './components/Settings';
-import Performance from './components/Performance';
-import Activities from './components/Activities';
-import Growth from './components/Growth';
-import Team from './components/Team';
+import MainRoute from './route/MainRoute';
 
 function App() {
 	return (
 		<Router>
 			<Navbar />
-			<Route path="/" exact component={Profile} />
-			<Route path="/admin" exact component={Admin} />
-			<Route path="/settings" exact component={Settings} />
-			<Route path="/performance" exact component={Performance} />
-			<Route path="/activities" exact component={Activities} />
-			<Route path="/growth" exact component={Growth} />
-			<Route path="/team" exact component={Team} />
+			<Switch>
+				{
+					MainRoute.map((route, index) => {
+						return(
+							<Route exact key={index} path={route.path} component={route.component} />
+						)
+					})
+				}
+				{/* <Route path="/" exact component={Profile} />
+				<Route path="/admin" component={Admin} />
+				<Route path="/settings" component={Settings} />
+				<Route path="/performance" component={Performance} />
+				<Route path="/activities" component={Activities} />
+				<Route path="/growth" component={Growth} />
+				<Route path="/team" component={Team} /> */}
+			</Switch>
 		</Router>
 	);
 }
